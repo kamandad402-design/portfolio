@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>28213 Practical Exam Documentation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; background: #f4f4f4; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { background: #2c3e50; color: white; padding: 1rem; text-align: center; }
+        nav { background: #34495e; padding: 1rem; }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+        nav li { margin: 0 15px; }
+        nav a { color: white; text-decoration: none; padding: 10px 15px; border-radius: 4px; transition: background 0.3s; }
+        nav a:hover { background: #1abc9c; }
+        .tab-content { display: none; background: white; padding: 2rem; margin: 1rem 0; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .active { display: block; }
+        h1, h2, h3 { color: #2c3e50; margin-bottom: 1rem; }
+        .evidence { background: #e8f4f8; padding: 1rem; margin: 1rem 0; border-left: 4px solid #3498db; }
+        .command { background: #2c3e50; color: #1abc9c; padding: 1rem; margin: 1rem 0; border-radius: 4px; font-family: monospace; }
+        .diagram { text-align: center; margin: 2rem 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background: #34495e; color: white; }
+        footer { text-align: center; margin: 2rem 0; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>28213 Practical Exam Documentation</h1>
+        <p>Student: Yves Julio | Course: 28213</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home" class="tab-link" data-tab="home">Home</a></li>
+            <li><a href="#topology" class="tab-link" data-tab="topology">Topology & IP Allocation</a></li>
+            <li><a href="#apache" class="tab-link" data-tab="apache">Apache Setup</a></li>
+            <li><a href="#dhcp" class="tab-link" data-tab="dhcp">DHCP Server</a></li>
+            <li><a href="#wazuh" class="tab-link" data-tab="wazuh">Wazuh Agent</a></li>
+            <li><a href="#evidence" class="tab-link" data-tab="evidence">Evidences</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active">
+            <h2>Welcome to Practical Exam Documentation</h2>
+            <p>This site documents the complete implementation of Task 3 requirements including:</p>
+            <ul>
+                <li>Apache Web Server with Virtual Host</li>
+                <li>DHCP Server for LAN1 (192.168.1.0/29)</li>
+                <li>Wazuh Agent with FIM Configuration</li>
+                <li>Complete documentation with evidences</li>
+            </ul>
+            
+            <div class="evidence">
+                <h3>Quick Access Links</h3>
+                <p><strong>Website URL:</strong> <a href="http://192.168.1.3" target="_blank">http://192.168.1.3</a></p>
+                <p><strong>Server IP:</strong> 192.168.1.3</p>
+                <p><strong>Document Root:</strong> /var/www/28213_docs</p>
+            </div>
+        </div>
+
+        <!-- Topology Tab -->
+        <div id="topology" class="tab-content">
+            <h2>Network Topology & IP Allocation</h2>
+            
+            <div class="diagram">
+                <h3>Network Diagram</h3>
+                <div class="evidence">
+                    <pre>
+    +----------------+      +-----------------+      +-------------------+
+    | Windows Client |------| Linux Server    |------| External Network  |
+    | 192.168.1.x    |      | 192.168.1.3/29  |      | (Internet)        |
+    +----------------+      | Apache + DHCP   |      +-------------------+
+                            | + Wazuh Agent   |
+                            +-----------------+
+                    </pre>
+                </div>
+            </div>
+
+            <h3>IP Allocation Table</h3>
+            <table>
+                <tr><th>Device</th><th>IP Address</th><th>Subnet</th><th>Purpose</th></tr>
+                <tr><td>Linux Server</td><td>192.168.1.3</td><td>/29</td><td>Documentation Server</td></tr>
+                <tr><td>Gateway</td><td>192.168.1.1</td><td>/29</td><td>Router</td></tr>
+                <tr><td>DHCP Range Start</td><td>192.168.1.4</td><td>/29</td><td>Client IPs</td></tr>
+                <tr><td>DHCP Range End</td><td>192.168.1.6</td><td>/29</td><td>Client IPs</td></tr>
+                <tr><td>Broadcast</td><td>192.168.1.7</td><td>/29</td><td>Network Broadcast</td></tr>
+            </table>
+        </div>
+
+        <!-- Apache Tab -->
+        <div id="apache" class="tab-content">
+            <h2>Apache Web Server Setup</h2>
+            
+            <h3>Installation & Configuration</h3>
+            <div class="command">apt install -y apache2</div>
+            
+            <h3>Virtual Host Configuration</h3>
+            <div class="evidence">
+                <p><strong>Config File:</strong> /etc/apache2/sites-available/28213-docs.conf</p>
+                <pre>
+&lt;VirtualHost *:80&gt;
+    ServerName 28213-docs.local
+    DocumentRoot /var/www/28213_docs
+    &lt;Directory /var/www/28213_docs&gt;
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+    ErrorLog /var/log/apache2/28213-docs-error.log
+    CustomLog /var/log/apache2/28213-docs-access.log combined
+&lt;/VirtualHost&gt;
+                </pre>
+            </div>
+
+            <h3>Service Status</h3>
+            <div class="command">systemctl status apache2</div>
+        </div>
+
+        <!-- DHCP Tab -->
+        <div id="dhcp" class="tab-content">
+            <h2>DHCP Server Configuration</h2>
+            
+            <h3>ISC DHCP Server Setup</h3>
+            <div class="command">apt install -y isc-dhcp-server</div>
+            
+            <h3>DHCP Configuration Evidence</h3>
+            <div class="evidence">
+                <p><strong>Config File:</strong> /etc/dhcp/dhcpd.conf</p>
+                <pre>
+# 28213-DHCP Configuration for LAN1
+subnet 192.168.1.0 netmask 255.255.255.248 {
+    range 192.168.1.4 192.168.1.6;
+    option routers 192.168.1.1;
+    option domain-name-servers 8.8.8.8, 1.1.1.1;
+    default-lease-time 600;
+    max-lease-time 7200;
+}
+
+# Reservations
+host client1 {
+    hardware ethernet 08:00:27:ab:cd:ef;
+    fixed-address 192.168.1.4;
+}
+                </pre>
+            </div>
+        </div>
+
+        <!-- Wazuh Tab -->
+        <div id="wazuh" class="tab-content">
+            <h2>Wazuh Agent Configuration</h2>
+            
+            <h3>Agent Installation</h3>
+            <div class="command">curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg</div>
+            
+            <h3>FIM (File Integrity Monitoring) Configuration</h3>
+            <div class="evidence">
+                <p><strong>Monitored Paths:</strong></p>
+                <ul>
+                    <li>/var/www/28213_docs/</li>
+                    <li>/etc/</li>
+                    <li>/etc/apache2/</li>
+                    <li>/etc/dhcp/</li>
+                </ul>
+            </div>
+
+            <h3>Agent Status</h3>
+            <div class="command">systemctl status wazuh-agent</div>
+        </div>
+
+        <!-- Evidence Tab -->
+        <div id="evidence" class="tab-content">
+            <h2>Evidences & Logs</h2>
+            
+            <h3>Apache Access Logs</h3>
+            <div class="evidence">
+                <p>Recent access logs will appear here:</p>
+                <div id="apache-logs">Loading...</div>
+            </div>
+
+            <h3>DHCP Lease File</h3>
+            <div class="evidence">
+                <p>Current DHCP leases:</p>
+                <div id="dhcp-leases">Loading...</div>
+            </div>
+
+            <h3>System Information</h3>
+            <div class="command" id="system-info">Loading system info...</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>28213 Practical Exam Documentation Server | Last updated: <span id="current-date"></span></p>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabId = link.getAttribute('data-tab');
+                
+                // Hide all tabs
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                // Show selected tab
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Update current date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString();
+
+        // Load dynamic content
+        setTimeout(() => {
+            document.getElementById('system-info').textContent = 'Server: ' + window.location.hostname + ' | IP: 192.168.1.3';
+        }, 100);
+    </script>
+</body>
+</html>
+HTML
+
+# Create additional evidence pages
+cat <<'HTML' > /var/www/28213_docs/evidence/index.html
+<!DOCTYPE html>
+<html>
+<head><title>Evidence Folder - 28213 Docs</title></head>
+<body>
+    <h1>Evidence Folder</h1>
+    <p>This folder contains screenshots and evidence files for all tasks.</p>
+    
+    <h2>Available Evidence:</h2>
+    <ul>
+        <li><a href="../index.html">Main Documentation</a></li>
+        <li>Network Configuration Screenshots</li>
+        <li>Apache Setup Evidence</li>
+        <li>DHCP Configuration Evidence</li>
+        <li>Wazuh Agent Evidence</li>
+    </ul>
+</body>
+</html>
+HTML
+
+# Enable Apache modules and site
+a2enmod rewrite
+a2dissite 000-default.conf 2>/dev/null || true
+
+# Create custom Apache config
+cat <<'APACHE' > /etc/apache2/sites-available/28213-docs.conf
+<VirtualHost *:80>
+    ServerName 28213-docs.local
+    ServerAdmin webmaster@28213-docs.local
+    DocumentRoot /var/www/28213_docs
+
+    <Directory /var/www/28213_docs>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog /var/log/apache2/28213-docs-error.log
+    CustomLog /var/log/apache2/28213-docs-access.log combined
+
+    LogLevel warn
+</VirtualHost>
+APACHE
+
+a2ensite 28213-docs.conf
+

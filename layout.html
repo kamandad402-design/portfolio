@@ -1,0 +1,2692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network & Systems Admin - Documentation Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            display: flex;
+            background-color: #0a1929;
+            color: #e6f1ff;
+            line-height: 1.6;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(to bottom, #0a1929, #0f2744);
+            color: #e6f1ff;
+            height: 100vh;
+            position: fixed;
+            padding: 20px 0;
+            box-shadow: 3px 0 10px rgba(17, 82, 147, 0.5);
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .sidebar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .logo {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(66, 153, 225, 0.5);
+            margin-bottom: 20px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #4299e1;
+        }
+        
+        .logo p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .nav-section {
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+        
+        .nav-section h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #90cdf4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-bottom: 8px;
+        }
+        
+        .nav-links a {
+            color: #e6f1ff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(66, 153, 225, 0.2);
+            border-left: 4px solid #4299e1;
+        }
+        
+        .nav-links i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .nav-description {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 300px;
+            background: rgba(15, 39, 68, 0.95);
+            color: #e6f1ff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-left: 10px;
+            border: 1px solid rgba(66, 153, 225, 0.5);
+        }
+        
+        .nav-links a:hover .nav-description {
+            display: block;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 30px;
+            overflow-y: auto;
+            height: 100vh;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            background-color: #0a1929;
+        }
+        
+        .main-content::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(66, 153, 225, 0.5);
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            color: #e6f1ff;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #a0aec0;
+            font-size: 16px;
+        }
+        
+        .content-section {
+            background: rgba(15, 39, 68, 0.7);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(17, 82, 147, 0.5);
+            color: #cbd5e0;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            color: #90cdf4;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(66, 153, 225, 0.5);
+        }
+        
+        .summary-content {
+            line-height: 1.8;
+        }
+        
+        .summary-content p {
+            margin-bottom: 15px;
+        }
+        
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(66, 153, 225, 0.3);
+            color: #e6f1ff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        
+        .video-link:hover {
+            background: rgba(66, 153, 225, 0.5);
+        }
+        
+        .video-link i {
+            margin-right: 8px;
+        }
+        
+        .topology-placeholder, .upload-placeholder {
+            background: rgba(15, 39, 68, 0.7);
+            border: 2px dashed rgba(66, 153, 225, 0.5);
+            border-radius: 8px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #a0aec0;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topology-placeholder i, .upload-placeholder i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #4299e1;
+        }
+        
+        #topology-image, .uploaded-image {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        
+        .upload-btn, .delete-btn {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: rgba(66, 153, 225, 0.5);
+            color: #e6f1ff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .upload-btn:hover {
+            background: rgba(66, 153, 225, 0.7);
+        }
+        
+        .delete-btn {
+            background: rgba(245, 101, 101, 0.7);
+            color: white;
+        }
+        
+        .delete-btn:hover {
+            background: rgba(229, 62, 62, 0.8);
+        }
+        
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            text-align: center;
+            display: none;
+        }
+        
+        .success {
+            background: rgba(72, 187, 120, 0.3);
+            color: #c8e6c9;
+            border: 1px solid rgba(72, 187, 120, 0.5);
+        }
+        
+        .error {
+            background: rgba(245, 101, 101, 0.3);
+            color: #fed7d7;
+            border: 1px solid rgba(245, 101, 101, 0.5);
+        }
+        
+        .ip-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .ip-table th, .ip-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(66, 153, 225, 0.5);
+        }
+        
+        .ip-table th {
+            background-color: rgba(66, 153, 225, 0.3);
+            color: #e6f1ff;
+            font-weight: 600;
+        }
+        
+        .ip-table tr:hover {
+            background-color: rgba(66, 153, 225, 0.1);
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .completed {
+            background: #48bb78;
+            color: #ffffff;
+        }
+        
+        .in-progress {
+            background: #ed8936;
+            color: #ffffff;
+        }
+        
+        .pending {
+            background: #e53e3e;
+            color: #ffffff;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-active {
+            background-color: #48bb78;
+        }
+        
+        .status-inactive {
+            background-color: #e53e3e;
+        }
+        
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .progress-item {
+            background: rgba(15, 39, 68, 0.8);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(66, 153, 225, 0.3);
+        }
+        
+        .progress-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(17, 82, 147, 0.3);
+        }
+        
+        .progress-item h3 {
+            color: #90cdf4;
+            margin-bottom: 5px;
+        }
+        
+        .command-block {
+            background: rgba(15, 39, 68, 0.9);
+            border-left: 4px solid #4299e1;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            font-family: 'Courier New', monospace;
+            color: #e6f1ff;
+            overflow-x: auto;
+        }
+        
+        .evidence-list {
+            list-style-type: none;
+            margin: 15px 0;
+        }
+        
+        .evidence-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(66, 153, 225, 0.2);
+        }
+        
+        .evidence-list li:before {
+            content: "•";
+            color: #4299e1;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .uploaded-files {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .uploaded-file {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border: 1px solid rgba(66, 153, 225, 0.5);
+            border-radius: 5px;
+            overflow: hidden;
+            background: rgba(15, 39, 68, 0.7);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .uploaded-file:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .uploaded-file img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .file-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .file-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+        
+        .file-actions button {
+            background: rgba(245, 101, 101, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .document-list {
+            list-style-type: none;
+            margin: 20px 0;
+        }
+        
+        .document-list li {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: rgba(15, 39, 68, 0.7);
+            border-radius: 5px;
+            border-left: 4px solid #4299e1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .document-actions button {
+            background: rgba(66, 153, 225, 0.5);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        
+        .document-actions button.delete-btn {
+            background: rgba(245, 101, 101, 0.7);
+        }
+        
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .video-item {
+            background: rgba(15, 39, 68, 0.7);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(66, 153, 225, 0.3);
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            height: 150px;
+            background: rgba(15, 39, 68, 0.9);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .video-thumbnail i {
+            font-size: 48px;
+            color: #4299e1;
+        }
+        
+        .video-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .video-actions button {
+            background: rgba(66, 153, 225, 0.5);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .video-actions button.delete-btn {
+            background: rgba(245, 101, 101, 0.7);
+        }
+        
+        .add-item-form {
+            background: rgba(15, 39, 68, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid rgba(66, 153, 225, 0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #e6f1ff;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(66, 153, 225, 0.5);
+            border-radius: 4px;
+            background: rgba(15, 39, 68, 0.9);
+            color: #e6f1ff;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .form-actions button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .form-actions button[type="submit"] {
+            background: rgba(66, 153, 225, 0.5);
+            color: white;
+        }
+        
+        .form-actions button[type="button"] {
+            background: rgba(245, 101, 101, 0.7);
+            color: white;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 2%;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .close:hover {
+            color: #bbb;
+        }
+        
+        .modal-caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+        }
+        
+        /* Loading indicator */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                height: auto;
+                overflow-y: visible;
+            }
+            
+            .nav-description {
+                display: none !important;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+                max-height: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">
+            <h1>F25</h1>
+            <p>CNET-F25 Final Project — (27784)</p>
+            <p>Network & Systems Admin — Documentation & Evidence Portal</p>
+        </div>
+        
+        <div class="nav-section">
+            <h3>Main Navigation</h3>
+            <ul class="nav-links">
+                <li>
+                    <a href="#" class="active" data-page="home">
+                        <i class="fas fa-home"></i> Home
+                        <div class="nav-description">
+                            <strong>Project Overview</strong><br>
+                            Executive summary, topology diagram, IP allocation table, and project progress tracking.
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="windows-server">
+                        <i class="fas fa-server"></i> Windows Server
+                        <div class="nav-description">
+                            <strong>Active Directory & Group Policy</strong><br>
+                            Domain Controller setup (yourID.f25), OUs creation, user accounts, GPO implementation for roaming profiles, mapped drives, software deployment, password policies, and NTP configuration.
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="linux-server">
+                        <i class="fas fa-tachometer-alt"></i> Linux Server
+                        <div class="nav-description">
+                            <strong>Documentation Server & Services</strong><br>
+                            Apache/Nginx hosting for documentation site, DHCP server for LAN1, Samba file sharing, FTP services, SSH access, and Wazuh agent configuration.
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="firewall">
+                        <i class="fas fa-shield-alt"></i> PFSense Firewall
+                        <div class="nav-description">
+                            <strong>Firewall & Network Security</strong><br>
+                            Interface configuration (WAN, LAN1, LAN2), NAT setup, DHCP for LAN2, firewall rules with schedules, NTOPng traffic monitoring, and automated backups.
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="vpn">
+                        <i class="fas fa-key"></i> VPN (OpenVPN)
+                        <div class="nav-description">
+                            <strong>Remote Access VPN</strong><br>
+                            OpenVPN server configuration, certificate-based authentication, integration with Active Directory IT OU, and client connectivity testing to LAN1 resources.
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="security">
+                        <i class="fas fa-eye"></i> Security Monitoring
+                        <div class="nav-description">
+                            <strong>Wazuh SIEM & Monitoring</strong><br>
+                            Wazuh OVA deployment with yourID hostname, agent enrollment, File Integrity Monitoring (FIM) for roaming and mapped folders, log ingestion from Windows, Linux, and pfSense.
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="backup">
+                        <i class="fas fa-hdd"></i> Backup & Restore
+                        <div class="nav-description">
+                            <strong>System Backup Strategies</strong><br>
+                            Automated pfSense configuration backups, scheduled exports with email delivery, restoration testing procedures, and verification of backup integrity.
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="testing">
+                        <i class="fas fa-vial"></i> Testing
+                        <div class="nav-description">
+                            <strong>Penetration Testing & Validation</strong><br>
+                            Kali Linux network scanning, controlled brute-force attempts, IDS/Wazuh correlation testing, firewall rule validation, and detection evidence collection.
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="summary">
+                        <i class="fas fa-file-alt"></i> Summary
+                        <div class="nav-description">
+                            <strong>Project Conclusion & Verification</strong><br>
+                            Overall project assessment, requirements verification, lessons learned, and final evidence compilation for all implemented systems and security measures.
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="nav-section">
+            <h3>Quick Links</h3>
+            <ul class="nav-links">
+                <li><a href="#" data-page="download-docs"><i class="fas fa-download"></i> Download Documentation</a></li>
+                <li><a href="#" data-page="video-demo"><i class="fas fa-video"></i> Video Demonstration</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Main Content Area - This will be dynamically updated -->
+    <div class="main-content" id="main-content">
+        <!-- Content will be loaded here by JavaScript -->
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+
+    <script>
+        // Template Engine - Simulates Django template functionality
+        class TemplateEngine {
+            constructor() {
+                this.templates = {};
+                this.currentPage = 'home';
+                this.init();
+            }
+            
+            init() {
+                this.loadTemplates();
+                this.setupNavigation();
+                this.loadPage('home');
+                this.setupModal();
+            }
+            
+            // Define all page templates
+            loadTemplates() {
+                this.templates = {
+                    'home': `
+                        <div class="header">
+                            <h1>Network & Systems Admin — Final Project</h1>
+                            <p>Documentation and evidence portal for the CNET-F25 final project</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Executive Summary</h2>
+                            <div class="summary-content">
+                                <p>This documentation portal covers the full final project for <strong>(yourID)</strong>. Use the tabs on the left to navigate each page contains step-by-step instructions, required screenshots, command snippets, and evidence. Replace placeholders and upload your screenshots in the appropriate sections.</p>
+                                
+                                <p><strong>Project Video Demonstration (Google Drive link)</strong></p>
+                                <a href="https://drive.google.com/..." class="video-link">
+                                    <i class="fas fa-play-circle"></i> Watch Project Demonstration
+                                </a>
+                                
+                                <p style="margin-top: 15px;"><em>Trip Add timestamps in the video description mapping to each lab segment (pfsense, AO, Wazuh, Kali tests).</em></p>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Topology Diagram</h2>
+                            <div id="statusMessage" class="status-message"></div>
+                            <div class="topology-placeholder" id="topology-container">
+                                <i class="fas fa-project-diagram" id="placeholder-icon"></i>
+                                <p id="placeholder-text">Drop topology image here or click to upload</p>
+                                <img id="topology-image" alt="Network Topology">
+                                <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                                <button class="upload-btn" id="upload-button">
+                                    <i class="fas fa-upload"></i> Upload Image
+                                </button>
+                                <button class="delete-btn" id="delete-button" style="display: none;">
+                                    <i class="fas fa-trash"></i> Delete Image
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Quick IP Allocation</h2>
+                            <table class="ip-table">
+                                <thead>
+                                    <tr>
+                                        <th>Network</th>
+                                        <th>Name</th>
+                                        <th>Subnet</th>
+                                        <th>Gateway</th>
+                                        <th>DHCP</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>LAN1</td>
+                                        <td>yourID-LAN1</td>
+                                        <td>192.168.1.0/29</td>
+                                        <td>192.168.1.1</td>
+                                        <td>Linux Doc Server</td>
+                                        <td><span class="status-indicator status-active"></span> Active</td>
+                                    </tr>
+                                    <tr>
+                                        <td>LAN2</td>
+                                        <td>yourID-LAN2</td>
+                                        <td>192.168.2.0/29</td>
+                                        <td>192.168.2.1</td>
+                                        <td>pfsense</td>
+                                        <td><span class="status-indicator status-active"></span> Active</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DMZ</td>
+                                        <td>yourID-DMZ</td>
+                                        <td>192.168.10.0/28</td>
+                                        <td>192.168.10.1</td>
+                                        <td>pfsense</td>
+                                        <td><span class="status-indicator status-inactive"></span> Inactive</td>
+                                    </tr>
+                                    <tr>
+                                        <td>VPN</td>
+                                        <td>yourID-VPN</td>
+                                        <td>10.8.0.0/24</td>
+                                        <td>10.8.0.1</td>
+                                        <td>OpenVPN</td>
+                                        <td><span class="status-indicator status-active"></span> Active</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Project Progress</h2>
+                            <div style="margin-top: 15px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                    <span>Overall Progress</span>
+                                    <span>60%</span>
+                                </div>
+                                <div style="height: 10px; background: #2d3748; border-radius: 5px; overflow: hidden;">
+                                    <div style="height: 100%; width: 60%; background: #4299e1;"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="progress-grid">
+                                <div class="progress-item">
+                                    <h3>Windows Server</h3>
+                                    <p>Configuration Complete</p>
+                                    <span class="tag completed">Completed</span>
+                                </div>
+                                <div class="progress-item">
+                                    <h3>Linux Server</h3>
+                                    <p>In Progress</p>
+                                    <span class="tag in-progress">In Progress</span>
+                                </div>
+                                <div class="progress-item">
+                                    <h3>Firewall</h3>
+                                    <p>Configuration Complete</p>
+                                    <span class="tag completed">Completed</span>
+                                </div>
+                                <div class="progress-item">
+                                    <h3>VPN Setup</h3>
+                                    <p>Testing Required</p>
+                                    <span class="tag in-progress">In Progress</span>
+                                </div>
+                                <div class="progress-item">
+                                    <h3>Security Monitoring</h3>
+                                    <p>Setup in Progress</p>
+                                    <span class="tag in-progress">In Progress</span>
+                                </div>
+                                <div class="progress-item">
+                                    <h3>Backup & Restore</h3>
+                                    <p>Configuration Started</p>
+                                    <span class="tag in-progress">In Progress</span>
+                                </div>
+                                <div class="progress-item">
+                                    <h3>Testing</h3>
+                                    <p>Not Started</p>
+                                    <span class="tag pending">Pending</span>
+                                </div>
+                                <div class="progress-item">
+                                    <h3>Summary</h3>
+                                    <p>Not Started</p>
+                                    <span class="tag pending">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    `,
+                    
+                    'windows-server': `
+                        <div class="header">
+                            <h1>Windows Server Configuration</h1>
+                            <p>Active Directory & Group Policy Implementation</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Active Directory Setup</h2>
+                            <div class="summary-content">
+                                <p>Domain Controller configuration for <strong>yourID.f25</strong> domain.</p>
+                                
+                                <h3>Key Configuration Steps:</h3>
+                                <ul class="evidence-list">
+                                    <li>Promoted server to Domain Controller</li>
+                                    <li>Created Organizational Units (IT, HR, Finance)</li>
+                                    <li>Configured user accounts with appropriate permissions</li>
+                                    <li>Set up Group Policy Objects for security and management</li>
+                                    <li>Implemented roaming profiles for IT department</li>
+                                    <li>Configured mapped network drives</li>
+                                    <li>Deployed software through GPO</li>
+                                    <li>Enforced password policies</li>
+                                    <li>Synchronized time with NTP server</li>
+                                </ul>
+                                
+                                <h3>Required Evidence:</h3>
+                                <ul class="evidence-list">
+                                    <li>Screenshot of Active Directory Users and Computers showing OUs</li>
+                                    <li>Screenshot of Group Policy Management console</li>
+                                    <li>Screenshot of DNS Manager with forward/reverse lookup zones</li>
+                                    <li>Screenshot of user account properties</li>
+                                    <li>Screenshot of GPO settings applied</li>
+                                </ul>
+                                
+                                <div class="command-block">
+                                    # PowerShell command to promote to Domain Controller<br>
+                                    Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools<br>
+                                    Install-ADDSForest -DomainName "yourID.f25" -DomainNetbiosName "yourID" -InstallDns
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Evidence Upload - Windows Server</h2>
+                            <div id="windows-server-statusMessage" class="status-message"></div>
+                            <div class="upload-placeholder" id="windows-server-upload-container">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop screenshots here or click to upload</p>
+                                <input type="file" id="windows-server-image-upload" accept="image/*" multiple style="display: none;">
+                                <button class="upload-btn" id="windows-server-upload-button">
+                                    <i class="fas fa-upload"></i> Upload Images
+                                </button>
+                            </div>
+                            <div class="uploaded-files" id="windows-server-uploaded-files"></div>
+                        </div>
+                    `,
+                    
+                    'linux-server': `
+                        <div class="header">
+                            <h1>Linux Server Configuration</h1>
+                            <p>Documentation Server & Network Services</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Web Server & Documentation Hosting</h2>
+                            <div class="summary-content">
+                                <p>Apache/Nginx web server configuration for hosting project documentation.</p>
+                                
+                                <h3>Services Configured:</h3>
+                                <ul class="evidence-list">
+                                    <li>Apache/Nginx web server with virtual host for documentation</li>
+                                    <li>DHCP server for LAN1 network (192.168.1.0/29)</li>
+                                    <li>Samba file sharing for cross-platform access</li>
+                                    <li>FTP server for file transfers</li>
+                                    <li>SSH server for remote administration</li>
+                                    <li>Wazuh agent for security monitoring</li>
+                                </ul>
+                                
+                                <h3>Required Evidence:</h3>
+                                <ul class="evidence-list">
+                                    <li>Screenshot of web browser accessing documentation site</li>
+                                    <li>Screenshot of DHCP configuration and lease table</li>
+                                    <li>Screenshot of Samba configuration and shared folders</li>
+                                    <li>Screenshot of FTP server configuration</li>
+                                    <li>Screenshot of SSH access</li>
+                                    <li>Screenshot of Wazuh agent status</li>
+                                </ul>
+                                
+                                <div class="command-block">
+                                    # Install and configure Apache<br>
+                                    sudo apt update && sudo apt install apache2<br>
+                                    sudo systemctl enable apache2 && sudo systemctl start apache2<br><br>
+                                    
+                                    # Configure DHCP server<br>
+                                    sudo apt install isc-dhcp-server<br>
+                                    # Edit /etc/dhcp/dhcpd.conf for LAN1 scope
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Evidence Upload - Linux Server</h2>
+                            <div id="linux-server-statusMessage" class="status-message"></div>
+                            <div class="upload-placeholder" id="linux-server-upload-container">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop screenshots here or click to upload</p>
+                                <input type="file" id="linux-server-image-upload" accept="image/*" multiple style="display: none;">
+                                <button class="upload-btn" id="linux-server-upload-button">
+                                    <i class="fas fa-upload"></i> Upload Images
+                                </button>
+                            </div>
+                            <div class="uploaded-files" id="linux-server-uploaded-files"></div>
+                        </div>
+                    `,
+                    
+                    'firewall': `
+                        <div class="header">
+                            <h1>PFSense Firewall Configuration</h1>
+                            <p>Network Security & Traffic Management</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Firewall Setup & Rules</h2>
+                            <div class="summary-content">
+                                <p>PFSense firewall configuration for network segmentation and security.</p>
+                                
+                                <h3>Configuration Details:</h3>
+                                <ul class="evidence-list">
+                                    <li>Interface configuration (WAN, LAN1, LAN2)</li>
+                                    <li>NAT setup for outbound connectivity</li>
+                                    <li>DHCP server for LAN2 network (192.168.2.0/29)</li>
+                                    <li>Firewall rules with schedules for access control</li>
+                                    <li>NTOPng traffic monitoring and analysis</li>
+                                    <li>Automated configuration backups</li>
+                                </ul>
+                                
+                                <h3>Required Evidence:</h3>
+                                <ul class="evidence-list">
+                                    <li>Screenshot of PFSense dashboard showing interfaces</li>
+                                    <li>Screenshot of firewall rules for each interface</li>
+                                    <li>Screenshot of NAT configuration</li>
+                                    <li>Screenshot of DHCP server settings for LAN2</li>
+                                    <li>Screenshot of NTOPng traffic dashboard</li>
+                                    <li>Screenshot of backup configuration</li>
+                                </ul>
+                                
+                                <div class="command-block">
+                                    # Access PFSense web interface<br>
+                                    https://192.168.1.1 (or your PFSense IP)<br><br>
+                                    
+                                    # Configure interfaces:<br>
+                                    - Assign WAN, LAN1, LAN2 interfaces<br>
+                                    - Set static IPs for LAN interfaces<br>
+                                    - Enable DHCP on LAN2
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Evidence Upload - Firewall</h2>
+                            <div id="firewall-statusMessage" class="status-message"></div>
+                            <div class="upload-placeholder" id="firewall-upload-container">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop screenshots here or click to upload</p>
+                                <input type="file" id="firewall-image-upload" accept="image/*" multiple style="display: none;">
+                                <button class="upload-btn" id="firewall-upload-button">
+                                    <i class="fas fa-upload"></i> Upload Images
+                                </button>
+                            </div>
+                            <div class="uploaded-files" id="firewall-uploaded-files"></div>
+                        </div>
+                    `,
+                    
+                    'vpn': `
+                        <div class="header">
+                            <h1>OpenVPN Configuration</h1>
+                            <p>Remote Access VPN Setup</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">VPN Server & Client Setup</h2>
+                            <div class="summary-content">
+                                <p>OpenVPN server configuration for secure remote access to network resources.</p>
+                                
+                                <h3>Implementation Details:</h3>
+                                <ul class="evidence-list">
+                                    <li>OpenVPN server installation and configuration</li>
+                                    <li>Certificate-based authentication setup</li>
+                                    <li>Integration with Active Directory IT OU</li>
+                                    <li>Client connectivity testing to LAN1 resources</li>
+                                    <li>Routing configuration for VPN clients</li>
+                                </ul>
+                                
+                                <h3>Required Evidence:</h3>
+                                <ul class="evidence-list">
+                                    <li>Screenshot of OpenVPN server configuration</li>
+                                    <li>Screenshot of certificate authority setup</li>
+                                    <li>Screenshot of client configuration files</li>
+                                    <li>Screenshot of VPN connection status</li>
+                                    <li>Screenshot of access to LAN1 resources from VPN client</li>
+                                </ul>
+                                
+                                <div class="command-block">
+                                    # Install OpenVPN on PFSense<br>
+                                    System > Package Manager > Available Packages > openvpn-client-export<br><br>
+                                    
+                                    # Configure OpenVPN server:<br>
+                                    VPN > OpenVPN > Servers > Add<br>
+                                    - Set protocol, interface, port<br>
+                                    - Configure cryptographic settings<br>
+                                    - Set up client-specific rules
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Evidence Upload - VPN</h2>
+                            <div id="vpn-statusMessage" class="status-message"></div>
+                            <div class="upload-placeholder" id="vpn-upload-container">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop screenshots here or click to upload</p>
+                                <input type="file" id="vpn-image-upload" accept="image/*" multiple style="display: none;">
+                                <button class="upload-btn" id="vpn-upload-button">
+                                    <i class="fas fa-upload"></i> Upload Images
+                                </button>
+                            </div>
+                            <div class="uploaded-files" id="vpn-uploaded-files"></div>
+                        </div>
+                    `,
+                    
+                    'security': `
+                        <div class="header">
+                            <h1>Security Monitoring</h1>
+                            <p>Wazuh SIEM Implementation</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Wazuh SIEM & Monitoring</h2>
+                            <div class="summary-content">
+                                <p>Wazuh security monitoring deployment for threat detection and compliance.</p>
+                                
+                                <h3>Monitoring Configuration:</h3>
+                                <ul class="evidence-list">
+                                    <li>Wazuh OVA deployment with yourID hostname</li>
+                                    <li>Agent enrollment on Windows, Linux, and PFSense systems</li>
+                                    <li>File Integrity Monitoring (FIM) for critical directories</li>
+                                    <li>Log ingestion from all network devices</li>
+                                    <li>Alert configuration and notification setup</li>
+                                </ul>
+                                
+                                <h3>Required Evidence:</h3>
+                                <ul class="evidence-list">
+                                    <li>Screenshot of Wazuh dashboard with agent status</li>
+                                    <li>Screenshot of FIM configuration for roaming and mapped folders</li>
+                                    <li>Screenshot of security events and alerts</li>
+                                    <li>Screenshot of log ingestion from Windows, Linux, and PFSense</li>
+                                    <li>Screenshot of agent configuration on each system</li>
+                                </ul>
+                                
+                                <div class="command-block">
+                                    # Deploy Wazuh OVA in VMware/vSphere<br>
+                                    - Import OVA template<br>
+                                    - Set hostname to yourID<br>
+                                    - Configure network settings<br><br>
+                                    
+                                    # Install Wazuh agent on Windows:<br>
+                                    msiexec /i wazuh-agent-4.3.10-1.msi /qn WAZUH_MANAGER='wazuh-server-ip' WAZUH_AGENT_GROUP='default'
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Evidence Upload - Security Monitoring</h2>
+                            <div id="security-statusMessage" class="status-message"></div>
+                            <div class="upload-placeholder" id="security-upload-container">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop screenshots here or click to upload</p>
+                                <input type="file" id="security-image-upload" accept="image/*" multiple style="display: none;">
+                                <button class="upload-btn" id="security-upload-button">
+                                    <i class="fas fa-upload"></i> Upload Images
+                                </button>
+                            </div>
+                            <div class="uploaded-files" id="security-uploaded-files"></div>
+                        </div>
+                    `,
+                    
+                    'backup': `
+                        <div class="header">
+                            <h1>Backup & Restore</h1>
+                            <p>System Protection Strategies</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Backup Configuration</h2>
+                            <div class="summary-content">
+                                <p>Automated backup procedures for system configurations and critical data.</p>
+                                
+                                <h3>Backup Implementation:</h3>
+                                <ul class="evidence-list">
+                                    <li>Automated PFSense configuration backups</li>
+                                    <li>Scheduled exports with email delivery</li>
+                                    <li>Restoration testing procedures</li>
+                                    <li>Verification of backup integrity</li>
+                                    <li>Documentation of recovery processes</li>
+                                </ul>
+                                
+                                <h3>Required Evidence:</h3>
+                                <ul class="evidence-list">
+                                    <li>Screenshot of PFSense automated backup configuration</li>
+                                    <li>Screenshot of backup email notifications</li>
+                                    <li>Screenshot of restoration testing</li>
+                                    <li>Screenshot of backup verification process</li>
+                                    <li>Screenshot of backup storage location</li>
+                                </ul>
+                                
+                                <div class="command-block">
+                                    # Configure PFSense automated backups:<br>
+                                    System > Backup > Settings<br>
+                                    - Enable automated backups<br>
+                                    - Set backup frequency<br>
+                                    - Configure email notifications<br>
+                                    - Set backup retention policy
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Evidence Upload - Backup & Restore</h2>
+                            <div id="backup-statusMessage" class="status-message"></div>
+                            <div class="upload-placeholder" id="backup-upload-container">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop screenshots here or click to upload</p>
+                                <input type="file" id="backup-image-upload" accept="image/*" multiple style="display: none;">
+                                <button class="upload-btn" id="backup-upload-button">
+                                    <i class="fas fa-upload"></i> Upload Images
+                                </button>
+                            </div>
+                            <div class="uploaded-files" id="backup-uploaded-files"></div>
+                        </div>
+                    `,
+                    
+                    'testing': `
+                        <div class="header">
+                            <h1>Penetration Testing</h1>
+                            <p>Security Validation & Evidence Collection</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Security Testing Procedures</h2>
+                            <div class="summary-content">
+                                <p>Comprehensive security testing to validate implemented controls and detection capabilities.</p>
+                                
+                                <h3>Testing Activities:</h3>
+                                <ul class="evidence-list">
+                                    <li>Kali Linux network scanning and enumeration</li>
+                                    <li>Controlled brute-force attempts</li>
+                                    <li>IDS/Wazuh correlation testing</li>
+                                    <li>Firewall rule validation</li>
+                                    <li>Detection evidence collection</li>
+                                </ul>
+                                
+                                <h3>Required Evidence:</h3>
+                                <ul class="evidence-list">
+                                    <li>Screenshot of network scanning results</li>
+                                    <li>Screenshot of brute-force attempt logs</li>
+                                    <li>Screenshot of Wazuh detection alerts</li>
+                                    <li>Screenshot of firewall blocked connections</li>
+                                    <li>Screenshot of security event correlation</li>
+                                </ul>
+                                
+                                <div class="command-block">
+                                    # Network scanning with Nmap:<br>
+                                    nmap -sS -A 192.168.1.0/29<br>
+                                    nmap -sU -p 1-1000 192.168.1.0/29<br><br>
+                                    
+                                    # Brute-force testing with Hydra:<br>
+                                    hydra -l admin -P wordlist.txt 192.168.1.2 ssh
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Evidence Upload - Testing</h2>
+                            <div id="testing-statusMessage" class="status-message"></div>
+                            <div class="upload-placeholder" id="testing-upload-container">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop screenshots here or click to upload</p>
+                                <input type="file" id="testing-image-upload" accept="image/*" multiple style="display: none;">
+                                <button class="upload-btn" id="testing-upload-button">
+                                    <i class="fas fa-upload"></i> Upload Images
+                                </button>
+                            </div>
+                            <div class="uploaded-files" id="testing-uploaded-files"></div>
+                        </div>
+                    `,
+                    
+                    'summary': `
+                        <div class="header">
+                            <h1>Project Summary</h1>
+                            <p>Final Assessment & Verification</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Project Conclusion</h2>
+                            <div class="summary-content">
+                                <p>Comprehensive assessment of project implementation and verification of requirements.</p>
+                                
+                                <h3>Assessment Areas:</h3>
+                                <ul class="evidence-list">
+                                    <li>Overall project implementation assessment</li>
+                                    <li>Requirements verification against project specifications</li>
+                                    <li>Lessons learned throughout the project</li>
+                                    <li>Final evidence compilation for all systems</li>
+                                    <li>Security measures validation</li>
+                                </ul>
+                                
+                                <h3>Final Documentation:</h3>
+                                <ul class="evidence-list">
+                                    <li>Complete project documentation</li>
+                                    <li>Evidence compilation for all implemented systems</li>
+                                    <li>Security validation results</li>
+                                    <li>Network performance assessment</li>
+                                    <li>Recommendations for future improvements</li>
+                                </ul>
+                                
+                                <div class="command-block">
+                                    # Final project verification checklist:<br>
+                                    - [ ] All network services operational<br>
+                                    - [ ] Security controls implemented<br>
+                                    - [ ] Monitoring systems active<br>
+                                    - [ ] Backup procedures tested<br>
+                                    - [ ] Documentation complete<br>
+                                    - [ ] Evidence collected for all components
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Final Evidence Upload</h2>
+                            <div id="summary-statusMessage" class="status-message"></div>
+                            <div class="upload-placeholder" id="summary-upload-container">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop final documentation screenshots here</p>
+                                <input type="file" id="summary-image-upload" accept="image/*" multiple style="display: none;">
+                                <button class="upload-btn" id="summary-upload-button">
+                                    <i class="fas fa-upload"></i> Upload Final Evidence
+                                </button>
+                            </div>
+                            <div class="uploaded-files" id="summary-uploaded-files"></div>
+                        </div>
+                    `,
+                    
+                    'download-docs': `
+                        <div class="header">
+                            <h1>Download Documentation</h1>
+                            <p>Project Documentation & Resource Downloads</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Available Documents</h2>
+                            <p>Download project documentation, reports, and configuration files.</p>
+                            
+                            <ul class="document-list" id="document-list">
+                                <!-- Documents will be dynamically added here -->
+                            </ul>
+                            
+                            <div class="add-item-form" id="add-document-form" style="display: none;">
+                                <h3>Add New Document</h3>
+                                <div class="form-group">
+                                    <label for="document-name">Document Name</label>
+                                    <input type="text" id="document-name" placeholder="Enter document name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="document-description">Description</label>
+                                    <textarea id="document-description" placeholder="Enter document description" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="document-file">Upload File</label>
+                                    <input type="file" id="document-file">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" id="save-document">Save Document</button>
+                                    <button type="button" id="cancel-document">Cancel</button>
+                                </div>
+                            </div>
+                            
+                            <button class="upload-btn" id="add-document-btn">
+                                <i class="fas fa-plus"></i> Add New Document
+                            </button>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Documentation Upload</h2>
+                            <div id="download-statusMessage" class="status-message"></div>
+                            <div class="upload-placeholder" id="download-upload-container">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop documentation files here or click to upload</p>
+                                <input type="file" id="download-file-upload" accept="*" multiple style="display: none;">
+                                <button class="upload-btn" id="download-upload-button">
+                                    <i class="fas fa-upload"></i> Upload Files
+                                </button>
+                            </div>
+                            <div class="uploaded-files" id="download-uploaded-files"></div>
+                        </div>
+                    `,
+                    
+                    'video-demo': `
+                        <div class="header">
+                            <h1>Video Demonstration</h1>
+                            <p>Project Videos & Screen Recordings</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Project Videos</h2>
+                            <p>Watch project demonstration videos and screen recordings.</p>
+                            
+                            <div class="video-list" id="video-list">
+                                <!-- Videos will be dynamically added here -->
+                            </div>
+                            
+                            <div class="add-item-form" id="add-video-form" style="display: none;">
+                                <h3>Add New Video</h3>
+                                <div class="form-group">
+                                    <label for="video-title">Video Title</label>
+                                    <input type="text" id="video-title" placeholder="Enter video title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="video-description">Description</label>
+                                    <textarea id="video-description" placeholder="Enter video description" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="video-url">Video URL (YouTube, Google Drive, etc.)</label>
+                                    <input type="text" id="video-url" placeholder="Enter video URL">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" id="save-video">Save Video</button>
+                                    <button type="button" id="cancel-video">Cancel</button>
+                                </div>
+                            </div>
+                            
+                            <button class="upload-btn" id="add-video-btn">
+                                <i class="fas fa-plus"></i> Add New Video
+                            </button>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="section-title">Video Upload</h2>
+                            <div id="video-statusMessage" class="status-message"></div>
+                            <div class="upload-placeholder" id="video-upload-container">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop video files here or click to upload</p>
+                                <input type="file" id="video-file-upload" accept="video/*" multiple style="display: none;">
+                                <button class="upload-btn" id="video-upload-button">
+                                    <i class="fas fa-upload"></i> Upload Videos
+                                </button>
+                            </div>
+                            <div class="uploaded-files" id="video-uploaded-files"></div>
+                        </div>
+                    `
+                };
+            }
+            
+            setupNavigation() {
+                const navLinks = document.querySelectorAll('.nav-links a[data-page]');
+                
+                navLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const page = link.getAttribute('data-page');
+                        
+                        // Update active state
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                        
+                        // Load the page
+                        this.loadPage(page);
+                    });
+                });
+            }
+            
+            loadPage(page) {
+                const mainContent = document.getElementById('main-content');
+                
+                // Show loading state
+                mainContent.innerHTML = `
+                    <div style="display: flex; justify-content: center; align-items: center; height: 200px;">
+                        <div class="loading"></div>
+                        <span style="margin-left: 10px; color: white;">Loading ${page.replace('-', ' ')}...</span>
+                    </div>
+                `;
+                
+                // Simulate loading delay
+                setTimeout(() => {
+                    if (this.templates[page]) {
+                        mainContent.innerHTML = this.templates[page];
+                        this.currentPage = page;
+                        
+                        // Initialize appropriate managers based on page
+                        if (page === 'home') {
+                            this.initTopologyManager();
+                        } else if (page === 'download-docs') {
+                            this.initDownloadDocsManager();
+                        } else if (page === 'video-demo') {
+                            this.initVideoDemoManager();
+                        } else {
+                            this.initUploadManager(page);
+                        }
+                    } else {
+                        mainContent.innerHTML = `
+                            <div class="header">
+                                <h1>Page Not Found</h1>
+                                <p>The requested page "${page}" is not available.</p>
+                            </div>
+                            <div class="content-section">
+                                <p>Please select a valid page from the navigation menu.</p>
+                            </div>
+                        `;
+                    }
+                }, 300);
+            }
+            
+            initTopologyManager() {
+                // Re-initialize the topology image manager for home page
+                if (window.topologyManager) {
+                    window.topologyManager.init();
+                }
+            }
+            
+            initUploadManager(page) {
+                // Initialize upload manager for the current page
+                if (window.uploadManager) {
+                    window.uploadManager.init(page);
+                }
+            }
+            
+            initDownloadDocsManager() {
+                // Initialize download documentation manager
+                if (window.downloadDocsManager) {
+                    window.downloadDocsManager.init();
+                }
+            }
+            
+            initVideoDemoManager() {
+                // Initialize video demonstration manager
+                if (window.videoDemoManager) {
+                    window.videoDemoManager.init();
+                }
+            }
+            
+            setupModal() {
+                // Get the modal
+                const modal = document.getElementById("imageModal");
+                const modalImg = document.getElementById("modalImage");
+                const captionText = document.getElementById("modalCaption");
+                const closeBtn = document.getElementsByClassName("close")[0];
+                
+                // Close modal when clicking X
+                closeBtn.onclick = function() {
+                    modal.style.display = "none";
+                }
+                
+                // Close modal when clicking outside the image
+                modal.onclick = function(event) {
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                }
+                
+                // Close modal with Escape key
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Escape') {
+                        modal.style.display = "none";
+                    }
+                });
+                
+                // Function to open modal with image
+                window.openImageModal = function(src, alt) {
+                    modal.style.display = "block";
+                    modalImg.src = src;
+                    captionText.innerHTML = alt;
+                }
+            }
+        }
+
+        // Persistent Topology Image Manager
+        class PersistentTopologyManager {
+            constructor() {
+                this.storageKey = 'persistentTopologyImage';
+                this.maxFileSize = 5 * 1024 * 1024;
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.loadStoredImage();
+            }
+            
+            setupEventListeners() {
+                const uploadButton = document.getElementById('upload-button');
+                const fileInput = document.getElementById('image-upload');
+                const deleteButton = document.getElementById('delete-button');
+                const topologyContainer = document.getElementById('topology-container');
+                
+                if (uploadButton && fileInput && deleteButton && topologyContainer) {
+                    uploadButton.addEventListener('click', () => {
+                        fileInput.click();
+                    });
+                    
+                    fileInput.addEventListener('change', (e) => {
+                        this.handleFile(e.target.files[0]);
+                        fileInput.value = '';
+                    });
+                    
+                    deleteButton.addEventListener('click', () => {
+                        this.deleteImage();
+                    });
+                    
+                    topologyContainer.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        topologyContainer.style.border = '2px dashed #4299e1';
+                        topologyContainer.style.backgroundColor = 'rgba(66, 153, 225, 0.1)';
+                    });
+                    
+                    topologyContainer.addEventListener('dragleave', () => {
+                        topologyContainer.style.border = '2px dashed rgba(66, 153, 225, 0.5)';
+                        topologyContainer.style.backgroundColor = 'rgba(15, 39, 68, 0.7)';
+                    });
+                    
+                    topologyContainer.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        topologyContainer.style.border = '2px dashed rgba(66, 153, 225, 0.5)';
+                        topologyContainer.style.backgroundColor = 'rgba(15, 39, 68, 0.7)';
+                        
+                        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                            this.handleFile(e.dataTransfer.files[0]);
+                        }
+                    });
+                }
+            }
+            
+            handleFile(file) {
+                if (!file) return;
+                
+                if (!file.type.startsWith('image/')) {
+                    this.showMessage('Please upload an image file.', 'error');
+                    return;
+                }
+                
+                if (file.size > this.maxFileSize) {
+                    this.showMessage(`File is too large. Maximum size is 5MB.`, 'error');
+                    return;
+                }
+                
+                this.processFile(file);
+            }
+            
+            processFile(file) {
+                const reader = new FileReader();
+                
+                reader.onload = (e) => {
+                    const imageData = {
+                        name: file.name,
+                        type: file.type,
+                        size: file.size,
+                        data: e.target.result,
+                        uploadDate: new Date().toISOString()
+                    };
+                    
+                    this.saveImage(imageData);
+                    this.displayImage(imageData);
+                    this.showMessage(`Topology image "${file.name}" uploaded successfully!`, 'success');
+                };
+                
+                reader.onerror = () => {
+                    this.showMessage(`Error reading file "${file.name}"`, 'error');
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            saveImage(imageData) {
+                try {
+                    localStorage.setItem(this.storageKey, JSON.stringify(imageData));
+                } catch (e) {
+                    if (e.name === 'QuotaExceededError') {
+                        this.showMessage('Storage limit exceeded. Please delete the current image first.', 'error');
+                    }
+                }
+            }
+            
+            getStoredImage() {
+                try {
+                    const stored = localStorage.getItem(this.storageKey);
+                    return stored ? JSON.parse(stored) : null;
+                } catch (e) {
+                    console.error('Error reading stored image:', e);
+                    return null;
+                }
+            }
+            
+            loadStoredImage() {
+                const storedImage = this.getStoredImage();
+                if (storedImage) {
+                    this.displayImage(storedImage);
+                }
+            }
+            
+            displayImage(imageData) {
+                const topologyImage = document.getElementById('topology-image');
+                const placeholderIcon = document.getElementById('placeholder-icon');
+                const placeholderText = document.getElementById('placeholder-text');
+                const uploadButton = document.getElementById('upload-button');
+                const deleteButton = document.getElementById('delete-button');
+                const topologyContainer = document.getElementById('topology-container');
+                
+                if (topologyImage && placeholderIcon && placeholderText && uploadButton && deleteButton) {
+                    topologyImage.src = imageData.data;
+                    topologyImage.style.display = 'block';
+                    placeholderIcon.style.display = 'none';
+                    placeholderText.style.display = 'none';
+                    uploadButton.textContent = 'Change Image';
+                    deleteButton.style.display = 'block';
+                    topologyContainer.style.border = '2px solid #4299e1';
+                }
+            }
+            
+            deleteImage() {
+                if (confirm('Are you sure you want to delete the topology image?')) {
+                    localStorage.removeItem(this.storageKey);
+                    
+                    const topologyImage = document.getElementById('topology-image');
+                    const placeholderIcon = document.getElementById('placeholder-icon');
+                    const placeholderText = document.getElementById('placeholder-text');
+                    const uploadButton = document.getElementById('upload-button');
+                    const deleteButton = document.getElementById('delete-button');
+                    const topologyContainer = document.getElementById('topology-container');
+                    
+                    if (topologyImage && placeholderIcon && placeholderText && uploadButton && deleteButton) {
+                        topologyImage.style.display = 'none';
+                        placeholderIcon.style.display = 'block';
+                        placeholderText.style.display = 'block';
+                        uploadButton.textContent = 'Upload Image';
+                        deleteButton.style.display = 'none';
+                        topologyContainer.style.border = '2px dashed rgba(66, 153, 225, 0.5)';
+                        
+                        this.showMessage('Topology image deleted successfully.', 'success');
+                    }
+                }
+            }
+            
+            showMessage(message, type) {
+                const statusMessage = document.getElementById('statusMessage');
+                if (statusMessage) {
+                    statusMessage.textContent = message;
+                    statusMessage.className = `status-message ${type}`;
+                    statusMessage.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        statusMessage.style.display = 'none';
+                    }, 3000);
+                }
+            }
+        }
+
+        // Upload Manager for all pages
+        class UploadManager {
+            constructor() {
+                this.maxFileSize = 5 * 1024 * 1024; // 5MB
+            }
+            
+            init(page) {
+                this.currentPage = page;
+                this.storageKey = `uploadedFiles_${page}`;
+                this.setupEventListeners(page);
+                this.loadUploadedFiles(page);
+            }
+            
+            setupEventListeners(page) {
+                // Use full page name for IDs
+                const uploadButton = document.getElementById(`${page}-upload-button`);
+                const fileInput = document.getElementById(`${page}-image-upload`);
+                const uploadContainer = document.getElementById(`${page}-upload-container`);
+                
+                if (uploadButton && fileInput && uploadContainer) {
+                    uploadButton.addEventListener('click', () => {
+                        fileInput.click();
+                    });
+                    
+                    fileInput.addEventListener('change', (e) => {
+                        this.handleFiles(e.target.files, page);
+                        fileInput.value = '';
+                    });
+                    
+                    uploadContainer.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        uploadContainer.style.border = '2px dashed #4299e1';
+                        uploadContainer.style.backgroundColor = 'rgba(66, 153, 225, 0.1)';
+                    });
+                    
+                    uploadContainer.addEventListener('dragleave', () => {
+                        uploadContainer.style.border = '2px dashed rgba(66, 153, 225, 0.5)';
+                        uploadContainer.style.backgroundColor = 'rgba(15, 39, 68, 0.7)';
+                    });
+                    
+                    uploadContainer.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        uploadContainer.style.border = '2px dashed rgba(66, 153, 225, 0.5)';
+                        uploadContainer.style.backgroundColor = 'rgba(15, 39, 68, 0.7)';
+                        
+                        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                            this.handleFiles(e.dataTransfer.files, page);
+                        }
+                    });
+                } else {
+                    console.error(`Upload elements not found for page: ${page}`);
+                }
+            }
+            
+            handleFiles(files, page) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    if (!file.type.startsWith('image/')) {
+                        this.showMessage('Please upload image files only.', 'error', page);
+                        continue;
+                    }
+                    
+                    if (file.size > this.maxFileSize) {
+                        this.showMessage(`File "${file.name}" is too large. Maximum size is 5MB.`, 'error', page);
+                        continue;
+                    }
+                    
+                    this.processFile(file, page);
+                }
+            }
+            
+            processFile(file, page) {
+                const reader = new FileReader();
+                
+                reader.onload = (e) => {
+                    const fileData = {
+                        id: Date.now() + Math.random(),
+                        name: file.name,
+                        type: file.type,
+                        size: file.size,
+                        data: e.target.result,
+                        uploadDate: new Date().toISOString()
+                    };
+                    
+                    this.saveFile(fileData, page);
+                    this.displayFile(fileData, page);
+                    this.showMessage(`File "${file.name}" uploaded successfully!`, 'success', page);
+                };
+                
+                reader.onerror = () => {
+                    this.showMessage(`Error reading file "${file.name}"`, 'error', page);
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            saveFile(fileData, page) {
+                const storageKey = `uploadedFiles_${page}`;
+                let existingFiles = this.getStoredFiles(page);
+                
+                if (!existingFiles) {
+                    existingFiles = [];
+                }
+                
+                existingFiles.push(fileData);
+                
+                try {
+                    localStorage.setItem(storageKey, JSON.stringify(existingFiles));
+                } catch (e) {
+                    if (e.name === 'QuotaExceededError') {
+                        this.showMessage('Storage limit exceeded. Please delete some files first.', 'error', page);
+                    }
+                }
+            }
+            
+            getStoredFiles(page) {
+                const storageKey = `uploadedFiles_${page}`;
+                try {
+                    const stored = localStorage.getItem(storageKey);
+                    return stored ? JSON.parse(stored) : null;
+                } catch (e) {
+                    console.error('Error reading stored files:', e);
+                    return null;
+                }
+            }
+            
+            loadUploadedFiles(page) {
+                const storedFiles = this.getStoredFiles(page);
+                const uploadedFilesContainer = document.getElementById(`${page}-uploaded-files`);
+                
+                if (storedFiles && uploadedFilesContainer) {
+                    uploadedFilesContainer.innerHTML = '';
+                    
+                    storedFiles.forEach(fileData => {
+                        this.displayFile(fileData, page);
+                    });
+                }
+            }
+            
+            displayFile(fileData, page) {
+                const uploadedFilesContainer = document.getElementById(`${page}-uploaded-files`);
+                
+                if (!uploadedFilesContainer) return;
+                
+                const fileElement = document.createElement('div');
+                fileElement.className = 'uploaded-file';
+                fileElement.innerHTML = `
+                    <img src="${fileData.data}" alt="${fileData.name}" onclick="openImageModal('${fileData.data}', '${fileData.name}')">
+                    <div class="file-info">${fileData.name}</div>
+                    <div class="file-actions">
+                        <button class="delete-file-btn" data-id="${fileData.id}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                uploadedFilesContainer.appendChild(fileElement);
+                
+                // Add event listener to delete button
+                const deleteButton = fileElement.querySelector('.delete-file-btn');
+                deleteButton.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent triggering the image click event
+                    this.deleteFile(fileData.id, page);
+                });
+            }
+            
+            deleteFile(fileId, page) {
+                if (confirm('Are you sure you want to delete this file?')) {
+                    const storedFiles = this.getStoredFiles(page);
+                    
+                    if (storedFiles) {
+                        const updatedFiles = storedFiles.filter(file => file.id !== fileId);
+                        const storageKey = `uploadedFiles_${page}`;
+                        
+                        localStorage.setItem(storageKey, JSON.stringify(updatedFiles));
+                        this.loadUploadedFiles(page);
+                        this.showMessage('File deleted successfully.', 'success', page);
+                    }
+                }
+            }
+            
+            showMessage(message, type, page) {
+                const statusMessage = document.getElementById(`${page}-statusMessage`);
+                if (statusMessage) {
+                    statusMessage.textContent = message;
+                    statusMessage.className = `status-message ${type}`;
+                    statusMessage.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        statusMessage.style.display = 'none';
+                    }, 3000);
+                }
+            }
+        }
+
+        // Download Documentation Manager
+        class DownloadDocsManager {
+            constructor() {
+                this.storageKey = 'projectDocuments';
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.loadDocuments();
+            }
+            
+            setupEventListeners() {
+                const addDocumentBtn = document.getElementById('add-document-btn');
+                const saveDocumentBtn = document.getElementById('save-document');
+                const cancelDocumentBtn = document.getElementById('cancel-document');
+                const uploadButton = document.getElementById('download-upload-button');
+                const fileInput = document.getElementById('download-file-upload');
+                const uploadContainer = document.getElementById('download-upload-container');
+                
+                if (addDocumentBtn) {
+                    addDocumentBtn.addEventListener('click', () => {
+                        this.showAddDocumentForm();
+                    });
+                }
+                
+                if (saveDocumentBtn) {
+                    saveDocumentBtn.addEventListener('click', () => {
+                        this.saveDocument();
+                    });
+                }
+                
+                if (cancelDocumentBtn) {
+                    cancelDocumentBtn.addEventListener('click', () => {
+                        this.hideAddDocumentForm();
+                    });
+                }
+                
+                if (uploadButton && fileInput && uploadContainer) {
+                    uploadButton.addEventListener('click', () => {
+                        fileInput.click();
+                    });
+                    
+                    fileInput.addEventListener('change', (e) => {
+                        this.handleFileUploads(e.target.files);
+                        fileInput.value = '';
+                    });
+                    
+                    uploadContainer.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        uploadContainer.style.border = '2px dashed #4299e1';
+                        uploadContainer.style.backgroundColor = 'rgba(66, 153, 225, 0.1)';
+                    });
+                    
+                    uploadContainer.addEventListener('dragleave', () => {
+                        uploadContainer.style.border = '2px dashed rgba(66, 153, 225, 0.5)';
+                        uploadContainer.style.backgroundColor = 'rgba(15, 39, 68, 0.7)';
+                    });
+                    
+                    uploadContainer.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        uploadContainer.style.border = '2px dashed rgba(66, 153, 225, 0.5)';
+                        uploadContainer.style.backgroundColor = 'rgba(15, 39, 68, 0.7)';
+                        
+                        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                            this.handleFileUploads(e.dataTransfer.files);
+                        }
+                    });
+                }
+            }
+            
+            showAddDocumentForm() {
+                const form = document.getElementById('add-document-form');
+                const addBtn = document.getElementById('add-document-btn');
+                
+                if (form && addBtn) {
+                    form.style.display = 'block';
+                    addBtn.style.display = 'none';
+                }
+            }
+            
+            hideAddDocumentForm() {
+                const form = document.getElementById('add-document-form');
+                const addBtn = document.getElementById('add-document-btn');
+                
+                if (form && addBtn) {
+                    form.style.display = 'none';
+                    addBtn.style.display = 'block';
+                    
+                    // Clear form fields
+                    document.getElementById('document-name').value = '';
+                    document.getElementById('document-description').value = '';
+                    document.getElementById('document-file').value = '';
+                }
+            }
+            
+            saveDocument() {
+                const name = document.getElementById('document-name').value;
+                const description = document.getElementById('document-description').value;
+                const fileInput = document.getElementById('document-file');
+                
+                if (!name || !description) {
+                    this.showMessage('Please fill in all fields.', 'error');
+                    return;
+                }
+                
+                const documentData = {
+                    id: Date.now(),
+                    name: name,
+                    description: description,
+                    uploadDate: new Date().toISOString()
+                };
+                
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = (e) => {
+                        documentData.file = {
+                            name: file.name,
+                            type: file.type,
+                            size: file.size,
+                            data: e.target.result
+                        };
+                        
+                        this.addDocument(documentData);
+                        this.hideAddDocumentForm();
+                        this.showMessage('Document added successfully!', 'success');
+                    };
+                    
+                    reader.readAsDataURL(file);
+                } else {
+                    this.addDocument(documentData);
+                    this.hideAddDocumentForm();
+                    this.showMessage('Document added successfully!', 'success');
+                }
+            }
+            
+            addDocument(documentData) {
+                let documents = this.getStoredDocuments();
+                
+                if (!documents) {
+                    documents = [];
+                }
+                
+                documents.push(documentData);
+                localStorage.setItem(this.storageKey, JSON.stringify(documents));
+                this.loadDocuments();
+            }
+            
+            getStoredDocuments() {
+                try {
+                    const stored = localStorage.getItem(this.storageKey);
+                    return stored ? JSON.parse(stored) : null;
+                } catch (e) {
+                    console.error('Error reading stored documents:', e);
+                    return null;
+                }
+            }
+            
+            loadDocuments() {
+                const documents = this.getStoredDocuments();
+                const documentList = document.getElementById('document-list');
+                
+                if (documentList) {
+                    documentList.innerHTML = '';
+                    
+                    if (documents && documents.length > 0) {
+                        documents.forEach(doc => {
+                            const listItem = document.createElement('li');
+                            listItem.innerHTML = `
+                                <div>
+                                    <strong>${doc.name}</strong>
+                                    <p>${doc.description}</p>
+                                    <small>Uploaded: ${new Date(doc.uploadDate).toLocaleDateString()}</small>
+                                </div>
+                                <div class="document-actions">
+                                    ${doc.file ? `<button class="download-btn" data-id="${doc.id}">Download</button>` : ''}
+                                    <button class="delete-btn" data-id="${doc.id}">Delete</button>
+                                </div>
+                            `;
+                            documentList.appendChild(listItem);
+                            
+                            // Add event listeners
+                            const downloadBtn = listItem.querySelector('.download-btn');
+                            const deleteBtn = listItem.querySelector('.delete-btn');
+                            
+                            if (downloadBtn) {
+                                downloadBtn.addEventListener('click', () => {
+                                    this.downloadDocument(doc);
+                                });
+                            }
+                            
+                            if (deleteBtn) {
+                                deleteBtn.addEventListener('click', () => {
+                                    this.deleteDocument(doc.id);
+                                });
+                            }
+                        });
+                    } else {
+                        documentList.innerHTML = '<li>No documents available. Add your first document!</li>';
+                    }
+                }
+            }
+            
+            downloadDocument(doc) {
+                if (doc.file) {
+                    const link = document.createElement('a');
+                    link.href = doc.file.data;
+                    link.download = doc.file.name;
+                    link.click();
+                }
+            }
+            
+            deleteDocument(id) {
+                if (confirm('Are you sure you want to delete this document?')) {
+                    let documents = this.getStoredDocuments();
+                    
+                    if (documents) {
+                        documents = documents.filter(doc => doc.id !== id);
+                        localStorage.setItem(this.storageKey, JSON.stringify(documents));
+                        this.loadDocuments();
+                        this.showMessage('Document deleted successfully.', 'success');
+                    }
+                }
+            }
+            
+            handleFileUploads(files) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    this.processFileUpload(file);
+                }
+            }
+            
+            processFileUpload(file) {
+                const reader = new FileReader();
+                
+                reader.onload = (e) => {
+                    const fileData = {
+                        id: Date.now() + Math.random(),
+                        name: file.name,
+                        type: file.type,
+                        size: file.size,
+                        data: e.target.result,
+                        uploadDate: new Date().toISOString()
+                    };
+                    
+                    this.saveUploadedFile(fileData);
+                    this.displayUploadedFile(fileData);
+                    this.showMessage(`File "${file.name}" uploaded successfully!`, 'success');
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            saveUploadedFile(fileData) {
+                const storageKey = 'uploadedDownloadFiles';
+                let existingFiles = this.getStoredUploadedFiles();
+                
+                if (!existingFiles) {
+                    existingFiles = [];
+                }
+                
+                existingFiles.push(fileData);
+                localStorage.setItem(storageKey, JSON.stringify(existingFiles));
+            }
+            
+            getStoredUploadedFiles() {
+                try {
+                    const stored = localStorage.getItem('uploadedDownloadFiles');
+                    return stored ? JSON.parse(stored) : null;
+                } catch (e) {
+                    console.error('Error reading stored files:', e);
+                    return null;
+                }
+            }
+            
+            displayUploadedFile(fileData) {
+                const uploadedFilesContainer = document.getElementById('download-uploaded-files');
+                
+                if (!uploadedFilesContainer) return;
+                
+                const fileElement = document.createElement('div');
+                fileElement.className = 'uploaded-file';
+                fileElement.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                        <i class="fas fa-file" style="font-size: 48px; color: #4299e1;"></i>
+                    </div>
+                    <div class="file-info">${fileData.name}</div>
+                    <div class="file-actions">
+                        <button class="delete-file-btn" data-id="${fileData.id}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                uploadedFilesContainer.appendChild(fileElement);
+                
+                // Add event listener to delete button
+                const deleteButton = fileElement.querySelector('.delete-file-btn');
+                deleteButton.addEventListener('click', () => {
+                    this.deleteUploadedFile(fileData.id);
+                });
+            }
+            
+            loadUploadedFiles() {
+                const storedFiles = this.getStoredUploadedFiles();
+                const uploadedFilesContainer = document.getElementById('download-uploaded-files');
+                
+                if (storedFiles && uploadedFilesContainer) {
+                    uploadedFilesContainer.innerHTML = '';
+                    
+                    storedFiles.forEach(fileData => {
+                        this.displayUploadedFile(fileData);
+                    });
+                }
+            }
+            
+            deleteUploadedFile(fileId) {
+                if (confirm('Are you sure you want to delete this file?')) {
+                    let storedFiles = this.getStoredUploadedFiles();
+                    
+                    if (storedFiles) {
+                        storedFiles = storedFiles.filter(file => file.id !== fileId);
+                        localStorage.setItem('uploadedDownloadFiles', JSON.stringify(storedFiles));
+                        this.loadUploadedFiles();
+                        this.showMessage('File deleted successfully.', 'success');
+                    }
+                }
+            }
+            
+            showMessage(message, type) {
+                const statusMessage = document.getElementById('download-statusMessage');
+                if (statusMessage) {
+                    statusMessage.textContent = message;
+                    statusMessage.className = `status-message ${type}`;
+                    statusMessage.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        statusMessage.style.display = 'none';
+                    }, 3000);
+                }
+            }
+        }
+
+        // Video Demonstration Manager
+        class VideoDemoManager {
+            constructor() {
+                this.storageKey = 'projectVideos';
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.loadVideos();
+                this.loadUploadedVideos();
+            }
+            
+            setupEventListeners() {
+                const addVideoBtn = document.getElementById('add-video-btn');
+                const saveVideoBtn = document.getElementById('save-video');
+                const cancelVideoBtn = document.getElementById('cancel-video');
+                const uploadButton = document.getElementById('video-upload-button');
+                const fileInput = document.getElementById('video-file-upload');
+                const uploadContainer = document.getElementById('video-upload-container');
+                
+                if (addVideoBtn) {
+                    addVideoBtn.addEventListener('click', () => {
+                        this.showAddVideoForm();
+                    });
+                }
+                
+                if (saveVideoBtn) {
+                    saveVideoBtn.addEventListener('click', () => {
+                        this.saveVideo();
+                    });
+                }
+                
+                if (cancelVideoBtn) {
+                    cancelVideoBtn.addEventListener('click', () => {
+                        this.hideAddVideoForm();
+                    });
+                }
+                
+                if (uploadButton && fileInput && uploadContainer) {
+                    uploadButton.addEventListener('click', () => {
+                        fileInput.click();
+                    });
+                    
+                    fileInput.addEventListener('change', (e) => {
+                        this.handleVideoUploads(e.target.files);
+                        fileInput.value = '';
+                    });
+                    
+                    uploadContainer.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        uploadContainer.style.border = '2px dashed #4299e1';
+                        uploadContainer.style.backgroundColor = 'rgba(66, 153, 225, 0.1)';
+                    });
+                    
+                    uploadContainer.addEventListener('dragleave', () => {
+                        uploadContainer.style.border = '2px dashed rgba(66, 153, 225, 0.5)';
+                        uploadContainer.style.backgroundColor = 'rgba(15, 39, 68, 0.7)';
+                    });
+                    
+                    uploadContainer.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        uploadContainer.style.border = '2px dashed rgba(66, 153, 225, 0.5)';
+                        uploadContainer.style.backgroundColor = 'rgba(15, 39, 68, 0.7)';
+                        
+                        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                            this.handleVideoUploads(e.dataTransfer.files);
+                        }
+                    });
+                }
+            }
+            
+            showAddVideoForm() {
+                const form = document.getElementById('add-video-form');
+                const addBtn = document.getElementById('add-video-btn');
+                
+                if (form && addBtn) {
+                    form.style.display = 'block';
+                    addBtn.style.display = 'none';
+                }
+            }
+            
+            hideAddVideoForm() {
+                const form = document.getElementById('add-video-form');
+                const addBtn = document.getElementById('add-video-btn');
+                
+                if (form && addBtn) {
+                    form.style.display = 'none';
+                    addBtn.style.display = 'block';
+                    
+                    // Clear form fields
+                    document.getElementById('video-title').value = '';
+                    document.getElementById('video-description').value = '';
+                    document.getElementById('video-url').value = '';
+                }
+            }
+            
+            saveVideo() {
+                const title = document.getElementById('video-title').value;
+                const description = document.getElementById('video-description').value;
+                const url = document.getElementById('video-url').value;
+                
+                if (!title || !description || !url) {
+                    this.showMessage('Please fill in all fields.', 'error');
+                    return;
+                }
+                
+                const videoData = {
+                    id: Date.now(),
+                    title: title,
+                    description: description,
+                    url: url,
+                    uploadDate: new Date().toISOString()
+                };
+                
+                this.addVideo(videoData);
+                this.hideAddVideoForm();
+                this.showMessage('Video added successfully!', 'success');
+            }
+            
+            addVideo(videoData) {
+                let videos = this.getStoredVideos();
+                
+                if (!videos) {
+                    videos = [];
+                }
+                
+                videos.push(videoData);
+                localStorage.setItem(this.storageKey, JSON.stringify(videos));
+                this.loadVideos();
+            }
+            
+            getStoredVideos() {
+                try {
+                    const stored = localStorage.getItem(this.storageKey);
+                    return stored ? JSON.parse(stored) : null;
+                } catch (e) {
+                    console.error('Error reading stored videos:', e);
+                    return null;
+                }
+            }
+            
+            loadVideos() {
+                const videos = this.getStoredVideos();
+                const videoList = document.getElementById('video-list');
+                
+                if (videoList) {
+                    videoList.innerHTML = '';
+                    
+                    if (videos && videos.length > 0) {
+                        videos.forEach(video => {
+                            const videoItem = document.createElement('div');
+                            videoItem.className = 'video-item';
+                            videoItem.innerHTML = `
+                                <div class="video-thumbnail">
+                                    <i class="fas fa-play-circle"></i>
+                                </div>
+                                <h3>${video.title}</h3>
+                                <p>${video.description}</p>
+                                <small>Added: ${new Date(video.uploadDate).toLocaleDateString()}</small>
+                                <div class="video-actions">
+                                    <button class="watch-btn" data-url="${video.url}">Watch</button>
+                                    <button class="delete-btn" data-id="${video.id}">Delete</button>
+                                </div>
+                            `;
+                            videoList.appendChild(videoItem);
+                            
+                            // Add event listeners
+                            const watchBtn = videoItem.querySelector('.watch-btn');
+                            const deleteBtn = videoItem.querySelector('.delete-btn');
+                            
+                            if (watchBtn) {
+                                watchBtn.addEventListener('click', () => {
+                                    window.open(video.url, '_blank');
+                                });
+                            }
+                            
+                            if (deleteBtn) {
+                                deleteBtn.addEventListener('click', () => {
+                                    this.deleteVideo(video.id);
+                                });
+                            }
+                        });
+                    } else {
+                        videoList.innerHTML = '<div class="video-item">No videos available. Add your first video!</div>';
+                    }
+                }
+            }
+            
+            deleteVideo(id) {
+                if (confirm('Are you sure you want to delete this video?')) {
+                    let videos = this.getStoredVideos();
+                    
+                    if (videos) {
+                        videos = videos.filter(video => video.id !== id);
+                        localStorage.setItem(this.storageKey, JSON.stringify(videos));
+                        this.loadVideos();
+                        this.showMessage('Video deleted successfully.', 'success');
+                    }
+                }
+            }
+            
+            handleVideoUploads(files) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    this.processVideoUpload(file);
+                }
+            }
+            
+            processVideoUpload(file) {
+                const reader = new FileReader();
+                
+                reader.onload = (e) => {
+                    const fileData = {
+                        id: Date.now() + Math.random(),
+                        name: file.name,
+                        type: file.type,
+                        size: file.size,
+                        data: e.target.result,
+                        uploadDate: new Date().toISOString()
+                    };
+                    
+                    this.saveUploadedVideo(fileData);
+                    this.displayUploadedVideo(fileData);
+                    this.showMessage(`Video "${file.name}" uploaded successfully!`, 'success');
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            saveUploadedVideo(fileData) {
+                const storageKey = 'uploadedVideoFiles';
+                let existingFiles = this.getStoredUploadedVideos();
+                
+                if (!existingFiles) {
+                    existingFiles = [];
+                }
+                
+                existingFiles.push(fileData);
+                localStorage.setItem(storageKey, JSON.stringify(existingFiles));
+            }
+            
+            getStoredUploadedVideos() {
+                try {
+                    const stored = localStorage.getItem('uploadedVideoFiles');
+                    return stored ? JSON.parse(stored) : null;
+                } catch (e) {
+                    console.error('Error reading stored videos:', e);
+                    return null;
+                }
+            }
+            
+            displayUploadedVideo(fileData) {
+                const uploadedFilesContainer = document.getElementById('video-uploaded-files');
+                
+                if (!uploadedFilesContainer) return;
+                
+                const fileElement = document.createElement('div');
+                fileElement.className = 'uploaded-file';
+                fileElement.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                        <i class="fas fa-file-video" style="font-size: 48px; color: #4299e1;"></i>
+                    </div>
+                    <div class="file-info">${fileData.name}</div>
+                    <div class="file-actions">
+                        <button class="delete-file-btn" data-id="${fileData.id}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                uploadedFilesContainer.appendChild(fileElement);
+                
+                // Add event listener to delete button
+                const deleteButton = fileElement.querySelector('.delete-file-btn');
+                deleteButton.addEventListener('click', () => {
+                    this.deleteUploadedVideo(fileData.id);
+                });
+            }
+            
+            loadUploadedVideos() {
+                const storedFiles = this.getStoredUploadedVideos();
+                const uploadedFilesContainer = document.getElementById('video-uploaded-files');
+                
+                if (storedFiles && uploadedFilesContainer) {
+                    uploadedFilesContainer.innerHTML = '';
+                    
+                    storedFiles.forEach(fileData => {
+                        this.displayUploadedVideo(fileData);
+                    });
+                }
+            }
+            
+            deleteUploadedVideo(fileId) {
+                if (confirm('Are you sure you want to delete this video?')) {
+                    let storedFiles = this.getStoredUploadedVideos();
+                    
+                    if (storedFiles) {
+                        storedFiles = storedFiles.filter(file => file.id !== fileId);
+                        localStorage.setItem('uploadedVideoFiles', JSON.stringify(storedFiles));
+                        this.loadUploadedVideos();
+                        this.showMessage('Video deleted successfully.', 'success');
+                    }
+                }
+            }
+            
+            showMessage(message, type) {
+                const statusMessage = document.getElementById('video-statusMessage');
+                if (statusMessage) {
+                    statusMessage.textContent = message;
+                    statusMessage.className = `status-message ${type}`;
+                    statusMessage.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        statusMessage.style.display = 'none';
+                    }, 3000);
+                }
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            window.templateEngine = new TemplateEngine();
+            window.topologyManager = new PersistentTopologyManager();
+            window.uploadManager = new UploadManager();
+            window.downloadDocsManager = new DownloadDocsManager();
+            window.videoDemoManager = new VideoDemoManager();
+        });
+    </script>
+</body>
+</html>
